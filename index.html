@@ -113,6 +113,9 @@ h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
 .note.realtor { background: var(--work-bg); }
 .send { justify-self: stretch; text-align: center; padding: 12px; border-radius: 12px; background: var(--ok); color: #fff; font-weight: 600; }
 .send-hint { font-size: 12px; color: var(--hint); text-align: center; margin-top: -6px; }
+.caption-box { font-size: 17px; font-weight: 600; padding: 12px 14px; border-radius: 12px; background: var(--ok-bg);
+  border: 1px dashed var(--ok); user-select: all; -webkit-user-select: all; overflow-wrap: anywhere; }
+.steps { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 14px; }
 .mini-send { font-size: 13px; font-weight: 600; color: var(--link); margin-top: 6px; }
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0)); transform: translateX(-50%); z-index: 30;
   background: rgba(20, 22, 28, .92); color: #fff; font-size: 14px; padding: 10px 14px; border-radius: 12px; max-width: 90vw; text-align: center; }
@@ -230,16 +233,43 @@ a { color: var(--link); }
     }
     return Promise.resolve(fallback());
   }
+  // Telegram не даёт Mini App вписать текст в сообщение группы — только буфер обмена.
+  // Поэтому промежуточный лист: подпись крупно, три шага, честно — скопировалось или нет.
   function sendTo(caption) {
     var url = 'https://t.me/c/' + D.tg.group + '/' + D.tg.docs;
+    var code = caption.split(' · ')[0];
     try { if (inTg) tg.HapticFeedback.impactOccurred('light'); } catch (e) {}
-    copyText(caption).then(function (ok) {
-      toast(ok ? 'Подпись скопирована — вставьте её к файлу или сообщению' : 'Напишите к файлу: ' + caption);
-      setTimeout(function () {
-        if (inTg) { try { tg.openTelegramLink(url); return; } catch (e) {} }
-        window.open(url, '_blank');
-      }, 1200);
-    });
+    closeSheet();
+    var back = el('div', 'sheet-back'); back.addEventListener('click', closeSheet);
+    var sh = el('div', 'sheet'); sh.setAttribute('role', 'dialog'); sh.setAttribute('aria-modal', 'true');
+    sh.append(el('div', 'grip'), el('div', 'eyebrow', 'Ответ в группу'), el('h2', null, 'Начните сообщение с подписи'));
+    sh.append(el('div', 'caption-box', caption));
+    var ol = el('ol', 'steps');
+    ol.append(el('li', null, 'Нажмите «Скопировать и открыть тему».'),
+              el('li', null, 'В теме «сбор документов» долго нажмите на поле ввода → «Вставить».'),
+              el('li', null, 'Допишите ответ или прикрепите файл скрепкой — подпись уйдёт вместе с ним. Отправьте.'));
+    sh.append(ol);
+    var st = el('div', 'send-hint');
+    var b = el('button', 'send', '📋 Скопировать и открыть тему');
+    b.addEventListener('click', function () {
+      copyText(caption).then(function (ok) {
+        if (ok) {
+          b.textContent = '✓ Скопировано — открываю тему'; st.textContent = '';
+          setTimeout(function () {
+            if (inTg) { try { tg.openTelegramLink(url); return; } catch (e) {} }
+            window.open(url, '_blank');
+          }, 900);
+        } else {
+          st.textContent = 'Скопировать не получилось. Напишите в начале сообщения: ' + code;
+          b.textContent = 'Открыть тему';
+          b.onclick = function () { if (inTg) { try { tg.openTelegramLink(url); return; } catch (e) {} } window.open(url, '_blank'); };
+        }
+      });
+    }, { once: true });
+    var c = el('button', 'close', 'Отмена'); c.addEventListener('click', closeSheet);
+    sh.append(b, st, c);
+    document.body.append(back, sh); sheetOpen = [back, sh];
+    if (inTg) try { tg.BackButton.show(); } catch (e) {}
   }
   function short(s, n) { return s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : s; }
 
@@ -276,7 +306,7 @@ a { color: var(--link); }
     if (D.tg && i.status !== 'готово') {
       var s = el('button', 'send', '📎 Прислать документ или ответ');
       s.addEventListener('click', function () { sendTo('п. ' + i.n + ' · ' + short(i.what, 70)); });
-      sh.append(s, el('div', 'send-hint', 'Откроется тема «сбор документов», подпись к пункту скопируется — вставьте её к файлу'));
+      sh.append(s, el('div', 'send-hint', 'Ответ или файл уйдёт в тему «сбор документов» с номером пункта'));
     }
     var c = el('button', 'close', 'Закрыть'); c.addEventListener('click', closeSheet); sh.append(c);
     document.body.append(back, sh); sheetOpen = [back, sh];
