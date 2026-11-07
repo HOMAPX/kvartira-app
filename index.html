@@ -116,7 +116,11 @@ h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
 .caption-box { font-size: 17px; font-weight: 600; padding: 12px 14px; border-radius: 12px; background: var(--ok-bg);
   border: 1px dashed var(--ok); user-select: all; -webkit-user-select: all; overflow-wrap: anywhere; }
 .steps { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 14px; }
-.mini-send { font-size: 13px; font-weight: 600; color: var(--link); margin-top: 6px; }
+.a-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.mini-send { flex: none; border: 1.5px solid var(--link); border-radius: 999px; padding: 6px 14px; line-height: 1.2;
+  text-align: center; }
+.mini-send:active { background: var(--work-bg); }
+.mini-send { font-size: 14px; font-weight: 600; color: var(--link); }
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0)); transform: translateX(-50%); z-index: 30;
   background: rgba(20, 22, 28, .92); color: #fff; font-size: 14px; padding: 10px 14px; border-radius: 12px; max-width: 90vw; text-align: center; }
 .close { justify-self: stretch; text-align: center; padding: 12px; border-radius: 12px; background: var(--accent); color: var(--accent-fg); font-weight: 600; }
@@ -370,7 +374,7 @@ a { color: var(--link); }
           if (D.tg) {
             var sb = el('button', 'mini-send', '✏️ Ответить');
             sb.addEventListener('click', function () { haptic(); sendTo(q.n + ' · ' + short(q.q, 70)); });
-            a.append(el('br'), sb);
+            a.classList.add('a-row'); a.append(sb);
           }
         }
         r.append(a); l.append(r);
