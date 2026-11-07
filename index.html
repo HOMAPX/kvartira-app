@@ -40,27 +40,32 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 8px; }
 
 .card { background: var(--card); border-radius: 14px; padding: 14px; }
-.hero { display: grid; gap: 10px; }
+.hero { display: grid; gap: 8px; padding: 12px 14px; }
+.hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 8px; row-gap: 2px; align-items: baseline; }
+.updated { font-size: 12px; color: var(--hint); white-space: nowrap; }
 .eyebrow { font-size: 12px; color: var(--hint); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
-h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
+h1 { margin: 0; font-size: 20px; line-height: 1.2; font-weight: 700; }
 .stage { color: var(--hint); font-size: 14px; }
 .stage b { color: var(--fg); font-weight: 600; }
-.bar { height: 8px; border-radius: 4px; background: var(--idle-bg); overflow: hidden; }
-.bar > i { display: block; height: 100%; background: var(--ok); border-radius: 4px; transition: width .4s; }
-.bar-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--hint); font-variant-numeric: tabular-nums; }
+.stepper { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; margin-top: 2px; }
+.stepper i { height: 6px; border-radius: 3px; background: var(--idle-bg); }
+.stepper i.done { background: var(--ok); }
+.stepper i.cur { background: var(--accent); }
+.step-label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--hint); }
+.step-label b { color: var(--fg); font-weight: 600; }
 .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .fact { background: var(--bg); border-radius: 10px; padding: 8px 10px; min-width: 0; }
-.fact .k { font-size: 11px; color: var(--hint); }
+.fact .k { font-size: 12px; color: var(--hint); }
 .fact .v { font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .fact .v.na { color: var(--hint); font-weight: 500; font-size: 13px; }
-.fact .o { font-size: 11px; color: var(--hint); }
+.fact .o { font-size: 12px; color: var(--hint); }
 
 .tabs { position: sticky; top: 0; z-index: 5; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
   background: var(--card); border-radius: 12px; padding: 4px; }
 .tab { text-align: center; padding: 8px 4px; border-radius: 9px; font-size: 13px; font-weight: 600; color: var(--hint); position: relative; }
 .tab[aria-selected="true"] { background: var(--accent); color: var(--accent-fg); }
-.tab .badge { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 9px; font-size: 11px;
-  line-height: 18px; background: var(--flag); color: #fff; }
+.tab .badge { position: absolute; top: -5px; right: -1px; min-width: 17px; padding: 0 4px; border-radius: 9px; font-size: 10px;
+  line-height: 17px; background: var(--flag); color: #fff; text-align: center; }
 
 .section-title { font-size: 13px; color: var(--hint); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; margin: 6px 4px 0; }
 .list { background: var(--card); border-radius: 14px; overflow: hidden; }
@@ -68,10 +73,14 @@ h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
 .row + .row { border-top: 1px solid var(--sep); }
 .row .num { font-size: 13px; color: var(--hint); font-variant-numeric: tabular-nums; }
 .row .title { font-weight: 500; }
-.row .sub { font-size: 13px; color: var(--hint); margin-top: 2px; }
+.row .sub { font-size: 14px; color: var(--hint); margin-top: 2px; }
 .row .chev { color: var(--hint); font-size: 18px; }
+.row.item { grid-template-columns: 34px minmax(0, 1fr); align-items: start; }
+.row.item .num { padding-top: 2px; }
+.row .open { display: block; width: 100%; }
+.a-row .chips { margin-top: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-.chip { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.chip { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
 .c-done { background: var(--ok-bg); color: var(--ok); }
 .c-work { background: var(--work-bg); color: var(--work); }
 .c-wait { background: var(--wait-bg); color: var(--wait); }
@@ -90,11 +99,11 @@ h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
 .stage-head .t { font-weight: 600; }
 .stage-head .s { font-size: 13px; color: var(--hint); }
 .stage-body { border-top: 1px solid var(--sep); }
-.stage-note { font-size: 13px; color: var(--hint); padding: 10px 14px 0; }
+.stage-note { font-size: 14px; color: var(--hint); padding: 10px 14px 0; }
 .stage-card.cur { box-shadow: inset 3px 0 0 var(--accent); }
 
 .empty { color: var(--hint); font-size: 14px; padding: 14px; text-align: center; }
-.foot { font-size: 12px; color: var(--hint); text-align: center; padding: 8px 0; }
+.foot { font-size: 13px; color: var(--hint); text-align: center; padding: 8px 0; }
 .legend { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 6px; }
 
 /* Подробности пункта — лист снизу */
@@ -107,12 +116,12 @@ h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
 .sheet .grip { width: 36px; height: 4px; border-radius: 2px; background: var(--sep); margin: -6px auto 0; }
 .sheet h2 { margin: 0; font-size: 18px; line-height: 1.3; }
 .kv { display: grid; gap: 2px; }
-.kv .k { font-size: 12px; color: var(--hint); }
-.note { font-size: 13px; padding: 10px 12px; border-radius: 10px; }
+.kv .k { font-size: 13px; color: var(--hint); }
+.note { font-size: 14px; padding: 10px 12px; border-radius: 10px; }
 .note.flag { background: var(--flag-bg); }
 .note.realtor { background: var(--work-bg); }
 .send { justify-self: stretch; text-align: center; padding: 12px; border-radius: 12px; background: var(--ok); color: #fff; font-weight: 600; }
-.send-hint { font-size: 12px; color: var(--hint); text-align: center; margin-top: -6px; }
+.send-hint { font-size: 13px; color: var(--hint); text-align: center; margin-top: -6px; }
 .caption-box { font-size: 17px; font-weight: 600; padding: 12px 14px; border-radius: 12px; background: var(--ok-bg);
   border: 1px dashed var(--ok); user-select: all; -webkit-user-select: all; overflow-wrap: anywhere; }
 .steps { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 14px; }
@@ -133,18 +142,17 @@ a { color: var(--link); }
 .kvrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; padding: 10px 14px; font-size: 14px; }
 .kvrow + .kvrow { border-top: 1px solid var(--sep); }
 .kvrow .k { color: var(--hint); }
-.kvrow .o { font-size: 12px; color: var(--hint); }
+.kvrow .o { font-size: 13px; color: var(--hint); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card hero">
-    <div class="eyebrow" id="eyebrow">Продажа квартиры</div>
+    <div class="hero-top"><div class="eyebrow" id="eyebrow">Продажа квартиры</div><div class="updated" id="built"></div></div>
     <h1>Продажа квартиры</h1>
     <div class="stage" id="stage"></div>
-    <div class="bar" aria-hidden="true"><i id="bar" style="width:0"></i></div>
-    <div class="bar-label"><span id="bar-l"></span><span id="bar-r"></span></div>
-    <div class="facts" id="facts"></div>
+    <div class="stepper" id="stepper" aria-hidden="true"></div>
+    <div class="step-label"><span id="step-l"></span><span id="step-r"></span></div>
   </div>
 
   <nav class="tabs" role="tablist" id="tabs">
@@ -157,17 +165,16 @@ a { color: var(--link); }
   <main id="view"></main>
 
   <div class="foot">
-    <div id="built"></div>
     <div class="legend">
-      <span class="chip c-idle">не начато</span><span class="chip c-work">в работе</span><span class="chip c-wait">ждём</span>
+      <span class="chip c-work">в работе</span><span class="chip c-wait">ждём</span>
       <span class="chip c-dep">зависит от ответа</span><span class="chip c-done">готово</span>
       <span class="chip c-realtor">список риелтора</span><span class="chip c-flag">уточняется</span>
     </div>
-    <div style="margin-top:8px">Страницу ведёт Александр. Документы и ответы — в группу «Продажа квартиры».</div>
+    <div style="margin-top:8px">Страницу ведёт Александр. Документ или ответ — кнопкой «Прислать» у пункта или «Ответить» у вопроса.</div>
   </div>
 </div>
 
-<script id="data" type="application/json">{"built": "07.11.2026", "conditions": [{"k": "Вид сделки", "v": "продажа квартиры, Юля — продавец", "o": "со слов, документ ещё не получен"}, {"k": "Город", "v": "Химки, Московская область — уточняется", "o": "со слов, документ ещё не получен"}, {"k": "Цена", "v": "10 000 000 RUB", "o": "со слов, документ ещё не получен"}, {"k": "Задаток", "v": "50 000 RUB, договор задатка заключён", "o": "со слов, документ ещё не получен"}, {"k": "Дата внесения задатка", "v": "06.11.2026", "o": "со слов, документ ещё не получен"}, {"k": "Дата договора задатка", "v": "пока неизвестно", "o": ""}, {"k": "Кому передан задаток (Юле лично, риелтору, на счёт)", "v": "пока неизвестно", "o": ""}, {"k": "Срок заключения основного договора по задатку", "v": "пока неизвестно", "o": ""}, {"k": "Засчитывается ли задаток в цену", "v": "пока неизвестно", "o": ""}, {"k": "Покупатель", "v": "найден, данных нет", "o": "со слов, документ ещё не получен"}, {"k": "Чем платит покупатель (свои, ипотека — какой банк, сертификаты)", "v": "пока неизвестно", "o": ""}, {"k": "Форма расчёта (аккредитив, безопасные расчёты, ячейка, перевод)", "v": "пока неизвестно", "o": ""}, {"k": "Форма договора (простая письменная, нотариальная)", "v": "пока неизвестно", "o": ""}, {"k": "Плановая дата сделки", "v": "пока неизвестно", "o": ""}, {"k": "Дата освобождения и передачи квартиры", "v": "пока неизвестно", "o": ""}], "object": [{"k": "Адрес", "v": "пока неизвестно", "o": ""}, {"k": "Кадастровый номер", "v": "пока неизвестно", "o": ""}, {"k": "Площадь, комнат, этаж", "v": "пока неизвестно", "o": ""}, {"k": "Перепланировка (есть, узаконена)", "v": "пока неизвестно", "o": ""}, {"k": "Обременение", "v": "ипотека (залог) в пользу ПАО «Совкомбанк»", "o": "по перечню риелтора"}, {"k": "Арест", "v": "квартира временно под арестом по долгу Юли", "o": "со слов, документ ещё не получен"}], "anketa": [{"n": "А1", "q": "Основание права: покупка, приватизация, наследство, дарение, ДДУ, иное?", "a": "", "o": ""}, {"n": "А2", "q": "Дата регистрации права Юли (по выписке ЕГРН или свидетельству)", "a": "", "o": ""}, {"n": "А3", "q": "Собственников сколько: Юля одна, доли, совместная собственность?", "a": "", "o": ""}, {"n": "А4", "q": "Юля в браке сейчас? Была ли в браке на дату приобретения? Брачный договор?", "a": "", "o": ""}, {"n": "А5", "q": "Есть ли несовершеннолетние среди собственников или зарегистрированных?", "a": "", "o": ""}, {"n": "А6", "q": "Использовался ли материнский капитал при покупке?", "a": "", "o": ""}, {"n": "А7", "q": "Кто зарегистрирован в квартире сейчас, кто и когда снимется с учёта?", "a": "", "o": ""}, {"n": "А8", "q": "Есть ли ипотека, залог, арест, иные ограничения на квартиру?", "a": "ипотека в ПАО «Совкомбанк»; квартира под арестом приставов", "o": "по перечню риелтора"}, {"n": "А9", "q": "Есть ли долги по коммунальным платежам и взносам на капремонт?", "a": "", "o": ""}, {"n": "А10", "q": "Есть ли риелтор — с чьей стороны? Есть ли юрист или нотариус у Юли?", "a": "риелтор Юли, ведёт сделку; юрист и нотариус — н/д", "o": "со слов, документ ещё не получен"}, {"n": "А11", "q": "Кто составлял договор задатка; есть ли у Юли экземпляр (скан)?", "a": "", "o": ""}, {"n": "А12", "q": "Будет ли Юля лично в Москве на всех этапах или нужна доверенность?", "a": "", "o": ""}, {"n": "А13", "q": "Есть ли у Юли подтверждённая учётная запись Госуслуг и электронная подпись?", "a": "", "o": ""}, {"n": "А14", "q": "Собирается ли Юля покупать другое жильё на эти деньги (влияет на сроки и расчёты)?", "a": "", "o": ""}, {"n": "А15", "q": "В каком районе Петербурга у Юли регистрация (прописка)? Справки ПНД и НД дают по району", "a": "прописка в Петербурге — «насколько помню»; район н/д", "o": "со слов, документ ещё не получен"}, {"n": "А16", "q": "Что арестовано приставами (квартира, счета, машина) и сколько исполнительных производств?", "a": "квартира и счета; число производств н/д", "o": "со слов, документ ещё не получен"}, {"n": "А17", "q": "Где сейчас документы на квартиру — в Москве или в Петербурге?", "a": "вероятно, в Петербурге: ценное увозила туда, когда сдавала квартиру", "o": "со слов, документ ещё не получен"}], "stages": [{"n": 0, "title": "Исходные", "note": "Документы на квартиру, вероятно, в Петербурге — Юля в ближайшее время едет туда собирать документы и справки.", "items": [{"n": "0.1", "what": "Ответить на анкету", "where": "Юля → Александр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "0.2", "what": "Прислать скан договора задатка (и расписки о получении задатка, если есть)", "where": "Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "0.3", "what": "Прислать правоустанавливающий документ на квартиру (договор, свидетельство)", "where": "Юля, Петербург", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "0.4", "what": "Прислать полный перечень документов от риелтора — на фото виден только фрагмент", "where": "Юля, риелтор", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 1, "title": "Объект, право и залог", "note": "Квартира в залоге у ПАО «Совкомбанк» (по перечню риелтора) и временно под арестом приставов — в ЕГРН ещё не проверено.", "items": [{"n": "1.1", "what": "Актуальная выписка ЕГРН, не старше 30 календарных дней", "where": "Госуслуги / МФЦ / Росреестр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.2", "what": "Выписка ЕГРН о переходе прав (история переходов права собственности)", "where": "Госуслуги / МФЦ / Росреестр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.3", "what": "Сверить выписку ЕГРН с договором задатка: собственник, адрес, площадь, обременения", "where": "Александр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "1.4", "what": "Договор об ипотеке (залоге недвижимости) с ПАО «Совкомбанк»", "where": "Юля / Совкомбанк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.5", "what": "Актуальная справка Совкомбанка об остатке ссудной задолженности и отсутствии просрочек", "where": "Совкомбанк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.6", "what": "Письменное согласие Совкомбанка на продажу либо документ, что согласие не требуется", "where": "Совкомбанк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.7", "what": "Узнать порядок погашения ипотеки и снятия залога при продаже: когда гасится долг, из чьих денег, как снимается обременение", "where": "Совкомбанк, риелтор", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "1.8", "what": "Снять арест с квартиры и счетов: оплатить каждое производство полностью, получить постановления об окончании, проверить по выписке ЕГРН, что запретов нет", "where": "ФССП, Госуслуги", "status": "в работе", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "1.9", "what": "Займ на погашение долга: договор займа на руках — сумма, ставка (за срок или годовых), срок возврата, что при задержке сделки", "where": "Юля, займодавец", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 2, "title": "Согласия и разрешения", "note": "", "items": [{"n": "2.1", "what": "Нотариальное согласие супруга на продажу", "where": "нотариус", "status": "зависит от анкеты", "refs": ["А4"], "when": "", "unverified": true, "realtor": false}, {"n": "2.2", "what": "Разрешение органа опеки", "where": "опека", "status": "зависит от анкеты", "refs": ["А5", "А6"], "when": "", "unverified": true, "realtor": false}, {"n": "2.3", "what": "Отказ сособственников от преимущественного права покупки", "where": "нотариус", "status": "зависит от анкеты", "refs": ["А3"], "when": "", "unverified": true, "realtor": false}, {"n": "2.4", "what": "Доверенность на представителя", "where": "нотариус", "status": "зависит от анкеты", "refs": ["А12"], "when": "", "unverified": true, "realtor": false}]}, {"n": 3, "title": "Справки и документы продавца", "note": "Срок годности каждой справки — по требованию того, кто её примет. Заказывать ближе к дате сделки.", "items": [{"n": "3.1", "what": "Паспорт продавца — все страницы с отметками", "where": "Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.2", "what": "Справка о зарегистрированных лицах (выписка из домовой книги)", "where": "Госуслуги / МФЦ", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.3", "what": "Справка об отсутствии задолженности по коммунальным платежам", "where": "управляющая компания / МФЦ", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.4", "what": "Справки из ПНД и НД (психоневрологический и наркологический диспансеры)", "where": "Петербург: ПНД района прописки; районный наркологический кабинет — nhosp.ru/dpo/", "status": "в работе", "refs": ["А15"], "when": "", "unverified": false, "realtor": true}, {"n": "3.5", "what": "Справка БКИ (кредитная история)", "where": "бюро кредитных историй", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.6", "what": "Письменное заверение об отсутствии процедуры банкротства либо справка из Федресурса", "where": "Юля / Федресурс", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.7", "what": "Справка об отсутствии долга по взносам на капремонт", "where": "региональный фонд капремонта — по адресу квартиры (Химки — Московская область)", "status": "не начато", "refs": [], "when": "по требованию покупателя или банка", "unverified": true, "realtor": false}, {"n": "3.8", "what": "Документы по перепланировке", "where": "МЖИ / БТИ", "status": "зависит от анкеты", "refs": [], "when": "объект: перепланировка", "unverified": true, "realtor": false}]}, {"n": 4, "title": "Договор купли-продажи и расчёты", "note": "", "items": [{"n": "4.1", "what": "Согласовать, кто составляет договор и в какой форме", "where": "Юля, покупатель, нотариус", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "4.2", "what": "Согласовать форму и порядок расчёта, условия раскрытия — с учётом погашения ипотеки и того, что счета Юли сейчас под арестом", "where": "Юля, покупатель, банк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "4.3", "what": "Сверить проект договора с договором задатка и выпиской ЕГРН; вопросы — нотариусу или юристу", "where": "Александр → Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "4.4", "what": "Требования банка покупателя к продавцу (если ипотека)", "where": "банк покупателя", "status": "зависит от анкеты", "refs": [], "when": "покупатель с ипотекой", "unverified": true, "realtor": false}]}, {"n": 5, "title": "Подписание и регистрация", "note": "", "items": [{"n": "5.1", "what": "Подписать договор и подать на регистрацию перехода права", "where": "МФЦ / нотариус / электронно", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "5.2", "what": "Госпошлина за регистрацию — кто платит и сколько", "where": "по договору", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "5.3", "what": "Получить подтверждение регистрации (выписку ЕГРН на покупателя)", "where": "Росреестр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 6, "title": "Расчёт и передача квартиры", "note": "", "items": [{"n": "6.1", "what": "Получить деньги по согласованному порядку; подтверждение — документом", "where": "банк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "6.2", "what": "Сняться с регистрационного учёта (Юле и другим зарегистрированным)", "where": "Госуслуги / МФЦ", "status": "зависит от анкеты", "refs": ["А7"], "when": "", "unverified": true, "realtor": false}, {"n": "6.3", "what": "Акт приёма-передачи, показания счётчиков, ключи", "where": "Юля, покупатель", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "6.4", "what": "Расторгнуть или переоформить договоры с поставщиками услуг", "where": "поставщики", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 7, "title": "После сделки", "note": "", "items": [{"n": "7.1", "what": "Выяснить, возникает ли налог и нужна ли декларация — по сроку и основанию владения", "where": "ФНС / налоговый консультант", "status": "зависит от анкеты", "refs": ["А1", "А2"], "when": "", "unverified": true, "realtor": false}, {"n": "7.2", "what": "Сохранить комплект: договор, выписка ЕГРН, подтверждение расчёта, акт", "where": "Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}], "deadlines": [{"what": "Внесение задатка", "date": "06.11.2026", "note": "точка отсчёта; срок основного договора считается по договору задатка"}, {"what": "Заключение основного договора по договору задатка", "date": "пока неизвестно", "note": "условия задатка — н/д до получения договора"}, {"what": "Возврат займа на погашение долга", "date": "дата получения займа + ~2 недели; дата получения н/д", "note": "возврат из денег за квартиру; что при задержке — н/д"}], "stage": "задаток внесён 06.11.2026, квартира под арестом по долгу, документы собираются по перечню риелтора", "tg": {"group": "4225818099", "docs": 4, "bot": "kvartira_sdelka_bot"}}</script>
+<script id="data" type="application/json">{"built": "07.11.2026, 12:32 МСК", "conditions": [{"k": "Вид сделки", "v": "продажа квартиры, Юля — продавец", "o": "со слов, документ ещё не получен"}, {"k": "Город", "v": "Химки, Московская область — уточняется", "o": "со слов, документ ещё не получен"}, {"k": "Цена", "v": "10 000 000 RUB", "o": "со слов, документ ещё не получен"}, {"k": "Задаток", "v": "50 000 RUB, договор задатка заключён", "o": "со слов, документ ещё не получен"}, {"k": "Дата внесения задатка", "v": "06.11.2026", "o": "со слов, документ ещё не получен"}, {"k": "Дата договора задатка", "v": "пока неизвестно", "o": ""}, {"k": "Кому передан задаток (Юле лично, риелтору, на счёт)", "v": "пока неизвестно", "o": ""}, {"k": "Срок заключения основного договора по задатку", "v": "пока неизвестно", "o": ""}, {"k": "Засчитывается ли задаток в цену", "v": "пока неизвестно", "o": ""}, {"k": "Покупатель", "v": "найден, данных нет", "o": "со слов, документ ещё не получен"}, {"k": "Чем платит покупатель (свои, ипотека — какой банк, сертификаты)", "v": "пока неизвестно", "o": ""}, {"k": "Форма расчёта (аккредитив, безопасные расчёты, ячейка, перевод)", "v": "пока неизвестно", "o": ""}, {"k": "Форма договора (простая письменная, нотариальная)", "v": "пока неизвестно", "o": ""}, {"k": "Плановая дата сделки", "v": "пока неизвестно", "o": ""}, {"k": "Дата освобождения и передачи квартиры", "v": "пока неизвестно", "o": ""}], "object": [{"k": "Адрес", "v": "пока неизвестно", "o": ""}, {"k": "Кадастровый номер", "v": "пока неизвестно", "o": ""}, {"k": "Площадь, комнат, этаж", "v": "пока неизвестно", "o": ""}, {"k": "Перепланировка (есть, узаконена)", "v": "пока неизвестно", "o": ""}, {"k": "Обременение", "v": "ипотека (залог) в пользу ПАО «Совкомбанк»", "o": "по перечню риелтора"}, {"k": "Арест", "v": "квартира временно под арестом по долгу Юли", "o": "со слов, документ ещё не получен"}], "anketa": [{"n": "А1", "q": "Основание права: покупка, приватизация, наследство, дарение, ДДУ, иное?", "a": "", "o": ""}, {"n": "А2", "q": "Дата регистрации права Юли (по выписке ЕГРН или свидетельству)", "a": "", "o": ""}, {"n": "А3", "q": "Собственников сколько: Юля одна, доли, совместная собственность?", "a": "", "o": ""}, {"n": "А4", "q": "Юля в браке сейчас? Была ли в браке на дату приобретения? Брачный договор?", "a": "", "o": ""}, {"n": "А5", "q": "Есть ли несовершеннолетние среди собственников или зарегистрированных?", "a": "", "o": ""}, {"n": "А6", "q": "Использовался ли материнский капитал при покупке?", "a": "", "o": ""}, {"n": "А7", "q": "Кто зарегистрирован в квартире сейчас, кто и когда снимется с учёта?", "a": "", "o": ""}, {"n": "А8", "q": "Есть ли ипотека, залог, арест, иные ограничения на квартиру?", "a": "ипотека в ПАО «Совкомбанк»; квартира под арестом приставов", "o": "по перечню риелтора"}, {"n": "А9", "q": "Есть ли долги по коммунальным платежам и взносам на капремонт?", "a": "", "o": ""}, {"n": "А10", "q": "Есть ли риелтор — с чьей стороны? Есть ли юрист или нотариус у Юли?", "a": "риелтор Юли, ведёт сделку; юрист и нотариус — н/д", "o": "со слов, документ ещё не получен"}, {"n": "А11", "q": "Кто составлял договор задатка; есть ли у Юли экземпляр (скан)?", "a": "", "o": ""}, {"n": "А12", "q": "Будет ли Юля лично в Москве на всех этапах или нужна доверенность?", "a": "", "o": ""}, {"n": "А13", "q": "Есть ли у Юли подтверждённая учётная запись Госуслуг и электронная подпись?", "a": "", "o": ""}, {"n": "А14", "q": "Собирается ли Юля покупать другое жильё на эти деньги (влияет на сроки и расчёты)?", "a": "", "o": ""}, {"n": "А15", "q": "В каком районе Петербурга у Юли регистрация (прописка)? Справки ПНД и НД дают по району", "a": "прописка в Петербурге — «насколько помню»; район н/д", "o": "со слов, документ ещё не получен"}, {"n": "А16", "q": "Что арестовано приставами (квартира, счета, машина) и сколько исполнительных производств?", "a": "квартира и счета; число производств н/д", "o": "со слов, документ ещё не получен"}, {"n": "А17", "q": "Где сейчас документы на квартиру — в Москве или в Петербурге?", "a": "вероятно, в Петербурге: ценное увозила туда, когда сдавала квартиру", "o": "со слов, документ ещё не получен"}], "stages": [{"n": 0, "title": "Исходные", "note": "Документы на квартиру, вероятно, в Петербурге — Юля в ближайшее время едет туда собирать документы и справки.", "items": [{"n": "0.1", "what": "Ответить на анкету", "where": "Юля → Александр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "0.2", "what": "Прислать скан договора задатка (и расписки о получении задатка, если есть)", "where": "Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "0.3", "what": "Прислать правоустанавливающий документ на квартиру (договор, свидетельство)", "where": "Юля, Петербург", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "0.4", "what": "Прислать полный перечень документов от риелтора — на фото виден только фрагмент", "where": "Юля, риелтор", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 1, "title": "Объект, право и залог", "note": "Квартира в залоге у ПАО «Совкомбанк» (по перечню риелтора) и временно под арестом приставов — в ЕГРН ещё не проверено.", "items": [{"n": "1.1", "what": "Актуальная выписка ЕГРН, не старше 30 календарных дней", "where": "Госуслуги / МФЦ / Росреестр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.2", "what": "Выписка ЕГРН о переходе прав (история переходов права собственности)", "where": "Госуслуги / МФЦ / Росреестр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.3", "what": "Сверить выписку ЕГРН с договором задатка: собственник, адрес, площадь, обременения", "where": "Александр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "1.4", "what": "Договор об ипотеке (залоге недвижимости) с ПАО «Совкомбанк»", "where": "Юля / Совкомбанк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.5", "what": "Актуальная справка Совкомбанка об остатке ссудной задолженности и отсутствии просрочек", "where": "Совкомбанк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.6", "what": "Письменное согласие Совкомбанка на продажу либо документ, что согласие не требуется", "where": "Совкомбанк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "1.7", "what": "Узнать порядок погашения ипотеки и снятия залога при продаже: когда гасится долг, из чьих денег, как снимается обременение", "where": "Совкомбанк, риелтор", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "1.8", "what": "Снять арест с квартиры и счетов: оплатить каждое производство полностью, получить постановления об окончании, проверить по выписке ЕГРН, что запретов нет", "where": "ФССП, Госуслуги", "status": "в работе", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "1.9", "what": "Займ на погашение долга: договор займа на руках — сумма, ставка (за срок или годовых), срок возврата, что при задержке сделки", "where": "Юля, займодавец", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 2, "title": "Согласия и разрешения", "note": "", "items": [{"n": "2.1", "what": "Нотариальное согласие супруга на продажу", "where": "нотариус", "status": "зависит от анкеты", "refs": ["А4"], "when": "", "unverified": true, "realtor": false}, {"n": "2.2", "what": "Разрешение органа опеки", "where": "опека", "status": "зависит от анкеты", "refs": ["А5", "А6"], "when": "", "unverified": true, "realtor": false}, {"n": "2.3", "what": "Отказ сособственников от преимущественного права покупки", "where": "нотариус", "status": "зависит от анкеты", "refs": ["А3"], "when": "", "unverified": true, "realtor": false}, {"n": "2.4", "what": "Доверенность на представителя", "where": "нотариус", "status": "зависит от анкеты", "refs": ["А12"], "when": "", "unverified": true, "realtor": false}]}, {"n": 3, "title": "Справки и документы продавца", "note": "Срок годности каждой справки — по требованию того, кто её примет. Заказывать ближе к дате сделки.", "items": [{"n": "3.1", "what": "Паспорт продавца — все страницы с отметками", "where": "Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.2", "what": "Справка о зарегистрированных лицах (выписка из домовой книги)", "where": "Госуслуги / МФЦ", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.3", "what": "Справка об отсутствии задолженности по коммунальным платежам", "where": "управляющая компания / МФЦ", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.4", "what": "Справки из ПНД и НД (психоневрологический и наркологический диспансеры)", "where": "Петербург: ПНД района прописки; районный наркологический кабинет — nhosp.ru/dpo/", "status": "в работе", "refs": ["А15"], "when": "", "unverified": false, "realtor": true}, {"n": "3.5", "what": "Справка БКИ (кредитная история)", "where": "бюро кредитных историй", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.6", "what": "Письменное заверение об отсутствии процедуры банкротства либо справка из Федресурса", "where": "Юля / Федресурс", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": true}, {"n": "3.7", "what": "Справка об отсутствии долга по взносам на капремонт", "where": "региональный фонд капремонта — по адресу квартиры (Химки — Московская область)", "status": "не начато", "refs": [], "when": "по требованию покупателя или банка", "unverified": true, "realtor": false}, {"n": "3.8", "what": "Документы по перепланировке", "where": "МЖИ / БТИ", "status": "зависит от анкеты", "refs": [], "when": "объект: перепланировка", "unverified": true, "realtor": false}]}, {"n": 4, "title": "Договор купли-продажи и расчёты", "note": "", "items": [{"n": "4.1", "what": "Согласовать, кто составляет договор и в какой форме", "where": "Юля, покупатель, нотариус", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "4.2", "what": "Согласовать форму и порядок расчёта, условия раскрытия — с учётом погашения ипотеки и того, что счета Юли сейчас под арестом", "where": "Юля, покупатель, банк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "4.3", "what": "Сверить проект договора с договором задатка и выпиской ЕГРН; вопросы — нотариусу или юристу", "where": "Александр → Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "4.4", "what": "Требования банка покупателя к продавцу (если ипотека)", "where": "банк покупателя", "status": "зависит от анкеты", "refs": [], "when": "покупатель с ипотекой", "unverified": true, "realtor": false}]}, {"n": 5, "title": "Подписание и регистрация", "note": "", "items": [{"n": "5.1", "what": "Подписать договор и подать на регистрацию перехода права", "where": "МФЦ / нотариус / электронно", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "5.2", "what": "Госпошлина за регистрацию — кто платит и сколько", "where": "по договору", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "5.3", "what": "Получить подтверждение регистрации (выписку ЕГРН на покупателя)", "where": "Росреестр", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 6, "title": "Расчёт и передача квартиры", "note": "", "items": [{"n": "6.1", "what": "Получить деньги по согласованному порядку; подтверждение — документом", "where": "банк", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}, {"n": "6.2", "what": "Сняться с регистрационного учёта (Юле и другим зарегистрированным)", "where": "Госуслуги / МФЦ", "status": "зависит от анкеты", "refs": ["А7"], "when": "", "unverified": true, "realtor": false}, {"n": "6.3", "what": "Акт приёма-передачи, показания счётчиков, ключи", "where": "Юля, покупатель", "status": "не начато", "refs": [], "when": "", "unverified": true, "realtor": false}, {"n": "6.4", "what": "Расторгнуть или переоформить договоры с поставщиками услуг", "where": "поставщики", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}, {"n": 7, "title": "После сделки", "note": "", "items": [{"n": "7.1", "what": "Выяснить, возникает ли налог и нужна ли декларация — по сроку и основанию владения", "where": "ФНС / налоговый консультант", "status": "зависит от анкеты", "refs": ["А1", "А2"], "when": "", "unverified": true, "realtor": false}, {"n": "7.2", "what": "Сохранить комплект: договор, выписка ЕГРН, подтверждение расчёта, акт", "where": "Юля", "status": "не начато", "refs": [], "when": "", "unverified": false, "realtor": false}]}], "deadlines": [{"what": "Внесение задатка", "date": "06.11.2026", "note": "точка отсчёта; срок основного договора считается по договору задатка"}, {"what": "Заключение основного договора по договору задатка", "date": "пока неизвестно", "note": "условия задатка — н/д до получения договора"}, {"what": "Возврат займа на погашение долга", "date": "дата получения займа + ~2 недели; дата получения н/д", "note": "возврат из денег за квартиру; что при задержке — н/д"}], "stage": "задаток внесён 06.11.2026, квартира под арестом по долгу, документы собираются по перечню риелтора", "tg": {"group": "4225818099", "docs": 4, "bot": "kvartira_sdelka_bot"}}</script>
 <script>
 (function () {
   var D = JSON.parse(document.getElementById('data').textContent);
@@ -192,10 +199,10 @@ a { color: var(--link); }
   function stLabel(s) { return s.indexOf('зависит') === 0 ? 'зависит от ответа' : s; }
   function chips(i) {
     var c = el('div', 'chips');
-    c.append(el('span', 'chip ' + stCls(i.status), stLabel(i.status)));
+    if (stCls(i.status) !== 'c-idle') c.append(el('span', 'chip ' + stCls(i.status), stLabel(i.status)));
     if (i.realtor) c.append(el('span', 'chip c-realtor', 'список риелтора'));
     if (i.unverified && i.status !== 'готово') c.append(el('span', 'chip c-flag', 'уточняется'));
-    return c;
+    return c.childNodes.length ? c : null;
   }
 
   // Шапка
@@ -204,21 +211,32 @@ a { color: var(--link); }
   var st = document.getElementById('stage'); st.append('Сейчас: '); st.append(el('b', null, D.stage || '—'));
   var all = [], done = 0;
   D.stages.forEach(function (s) { s.items.forEach(function (i) { all.push(i); if (i.status === 'готово') done++; }); });
-  document.getElementById('bar').style.width = (all.length ? Math.round(done * 100 / all.length) : 0) + '%';
-  document.getElementById('bar-l').textContent = 'Готово ' + done + ' из ' + all.length + ' шагов';
   var cur = null;
   D.stages.forEach(function (s) { if (cur === null && s.items.some(function (i) { return i.status !== 'готово'; })) cur = s.n; });
   var curStage = D.stages.filter(function (s) { return s.n === cur; })[0];
-  document.getElementById('bar-r').textContent = curStage ? 'этап ' + cur + ' · ' + curStage.title.toLowerCase() : 'всё готово';
-
-  var facts = document.getElementById('facts');
-  [['Цена', 'Цена'], ['Задаток', 'Задаток'], ['Срок договора', 'Срок заключения основного договора']].forEach(function (p) {
-    var c = cond(p[1]); var f = el('div', 'fact'); var v = c ? c.v.replace(/, договор задатка заключён/, '').replace(' RUB', ' ₽') : 'пока неизвестно';
-    f.append(el('div', 'k', p[0]), el('div', 'v' + (v === 'пока неизвестно' ? ' na' : ''), v === 'пока неизвестно' ? 'неизвестно' : v));
-    if (p[0] === 'Задаток') { var paid = cond('Дата внесения задатка'); if (paid && paid.v !== 'пока неизвестно') f.append(el('div', 'o', 'внесён ' + paid.v)); }
-    facts.append(f);
+  // этапы для людей — с единицы: «этап 1 из 8»; номера пунктов (0.2) — как в чек-листе, это маркеры ответов
+  function human(s) { return D.stages.indexOf(s) + 1; }
+  var stepper = document.getElementById('stepper');
+  D.stages.forEach(function (s) {
+    var d = s.items.every(function (i) { return i.status === 'готово'; });
+    stepper.append(el('i', d ? 'done' : (s === curStage ? 'cur' : null)));
   });
-  document.getElementById('built').textContent = 'Обновлено ' + D.built;
+  var sl = document.getElementById('step-l');
+  if (curStage) { sl.append('Этап ' + human(curStage) + ' из ' + D.stages.length + ' · '); sl.append(el('b', null, curStage.title)); }
+  else sl.textContent = 'Все этапы пройдены';
+  document.getElementById('step-r').textContent = 'готово ' + done + ' из ' + all.length;
+
+  function facts() {
+    var box = el('div', 'facts');
+    [['Цена', 'Цена'], ['Задаток', 'Задаток'], ['Срок договора', 'Срок заключения основного договора']].forEach(function (p) {
+      var c = cond(p[1]); var f = el('div', 'fact'); var v = c ? c.v.replace(/, договор задатка заключён/, '').replace(' RUB', ' ₽') : 'пока неизвестно';
+      f.append(el('div', 'k', p[0]), el('div', 'v' + (v === 'пока неизвестно' ? ' na' : ''), v === 'пока неизвестно' ? 'неизвестно' : v));
+      if (p[0] === 'Задаток') { var paid = cond('Дата внесения задатка'); if (paid && paid.v !== 'пока неизвестно') f.append(el('div', 'o', 'внесён ' + paid.v)); }
+      box.append(f);
+    });
+    return box;
+  }
+  document.getElementById('built').textContent = 'обновлено ' + D.built.replace(/\.\d{4},/, ',');
 
   // «Прислать документ или ответ»: подпись — в буфер, затем открывается тема «сбор документов».
   // Файл Юля прикрепляет скрепкой Telegram — сообщение от её имени, его забирает telegram_inbox.py.
@@ -262,9 +280,9 @@ a { color: var(--link); }
     var back = el('div', 'sheet-back'); back.addEventListener('click', closeSheet);
     var sh = el('div', 'sheet'); sh.setAttribute('role', 'dialog'); sh.setAttribute('aria-modal', 'true');
     sh.append(el('div', 'grip'));
-    sh.append(el('div', 'eyebrow', 'Этап ' + stage.n + ' · пункт ' + i.n));
+    sh.append(el('div', 'eyebrow', 'Этап ' + human(stage) + ' · пункт ' + i.n));
     sh.append(el('h2', null, i.what));
-    sh.append(chips(i));
+    var ch = chips(i); if (ch) sh.append(ch);
     if (i.where) { var w = el('div', 'kv'); w.append(el('div', 'k', 'Где / кто'), el('div', null, i.where)); sh.append(w); }
     if (i.when) { var wh = el('div', 'kv'); wh.append(el('div', 'k', 'Когда нужно'), el('div', null, i.when)); sh.append(wh); }
     if (i.refs.length) {
@@ -293,14 +311,32 @@ a { color: var(--link); }
   if (inTg) try { tg.BackButton.onClick(closeSheet); } catch (e) {}
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
 
+  // строка пункта: текст открывает карточку; под ним — пометки слева и «Прислать» справа, как у вопросов
   function itemRow(i, stage) {
-    var b = el('button', 'row');
-    var mid = el('div'); mid.append(el('div', 'title', i.what));
-    if (i.where) mid.append(el('div', 'sub', i.where));
-    mid.append(chips(i));
-    b.append(el('div', 'num', i.n), mid, el('div', 'chev', '›'));
+    var row = el('div', 'row item');
+    var body = el('div');
+    var b = el('button', 'open');
+    b.append(el('div', 'title', i.what));
+    if (i.where) b.append(el('div', 'sub', i.where));
     b.addEventListener('click', function () { openItem(i, stage); });
-    return b;
+    body.append(b);
+    var ch = chips(i), canSend = D.tg && i.status !== 'готово';
+    if (ch || canSend) {
+      var bar = el('div', 'a-row'); bar.append(ch || el('span'));
+      if (canSend && /анкет/i.test(i.what)) {
+        var qb = el('button', 'mini-send', 'К вопросам ›');
+        qb.addEventListener('click', function () { haptic(); show('questions'); window.scrollTo(0, 0); });
+        bar.append(qb);
+      } else if (canSend) {
+        var sb = el('button', 'mini-send', '📎 Прислать');
+        sb.setAttribute('aria-label', 'Прислать документ или ответ по пункту ' + i.n);
+        sb.addEventListener('click', function () { sendTo('п. ' + i.n + ' · ' + short(i.what, 70)); });
+        bar.append(sb);
+      }
+      body.append(bar);
+    }
+    row.append(el('div', 'num', i.n), body);
+    return row;
   }
   function ring(doneN, total, n) {
     var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
@@ -319,7 +355,7 @@ a { color: var(--link); }
       var box = el('div'); box.style.display = 'grid'; box.style.gap = '10px';
       var stage = D.stages.filter(function (s) { return s.n === cur; })[0];
       if (stage) {
-        box.append(el('div', 'section-title', 'Что нужно сейчас — этап ' + stage.n + '. ' + stage.title));
+        box.append(el('div', 'section-title', 'Что нужно сейчас — этап ' + human(stage) + '. ' + stage.title));
         if (stage.note) box.append(el('div', 'card stage-note', stage.note));
         var l = el('div', 'list');
         stage.items.forEach(function (i) { if (i.status !== 'готово') l.append(itemRow(i, stage)); });
@@ -348,7 +384,7 @@ a { color: var(--link); }
         var card = el('div', 'stage-card' + (s.n === cur ? ' cur' : ''));
         var head = el('button', 'stage-head'); head.setAttribute('aria-expanded', s.n === cur ? 'true' : 'false');
         var mid = el('div'); mid.append(el('div', 't', s.title), el('div', 's', 'готово ' + d + ' из ' + s.items.length));
-        head.append(ring(d, s.items.length, s.n), mid, el('div', 'chev', s.n === cur ? '⌄' : '›'));
+        head.append(ring(d, s.items.length, human(s)), mid, el('div', 'chev', s.n === cur ? '⌄' : '›'));
         var body = el('div', 'stage-body'); body.hidden = s.n !== cur;
         if (s.note) body.append(el('div', 'stage-note', s.note));
         s.items.forEach(function (i) { body.append(itemRow(i, s)); });
@@ -385,13 +421,15 @@ a { color: var(--link); }
       return box;
     },
     flat: function () {
-      var l = el('div', 'list');
+      var box = el('div'); box.style.display = 'grid'; box.style.gap = '10px';
+      var fc = el('div', 'card'); fc.append(facts()); box.append(fc);
+      var l = el('div', 'list'); box.append(l);
       D.object.concat(D.conditions).forEach(function (c) {
         var r = el('div', 'kvrow'); var v = el('div'); v.append(c.v);
         if (c.o && c.v !== 'пока неизвестно') v.append(el('div', 'o', c.o));
         r.append(el('div', 'k', c.k), v); l.append(r);
       });
-      return l;
+      return box;
     }
   };
   var openQ = D.anketa.filter(function (q) { return !q.a; }).length;
